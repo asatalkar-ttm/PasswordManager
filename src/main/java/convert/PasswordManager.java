@@ -30,12 +30,12 @@ public class PasswordManager {
         return lines;
     }
 
-    public void ReadFromCSV() throws Exception {
-        Credentials[] credentials = new Credentials[getNumberOfLines()];
+    public Credentials[] ReadFromCSV(Credentials[] credentials) throws Exception {
         Encryption encryption = new Encryption();
         CSVReader reader = new CSVReader(new FileReader(FILEPATH));
         String [] nextLine;
         String[] CSVArray = new String[4];
+        int i = 0;
         while ((nextLine = reader.readNext()) != null) {
             // nextLine[] is an array of values from the line
             CSVArray[0] = nextLine[0];
@@ -43,9 +43,13 @@ public class PasswordManager {
             CSVArray[2] = nextLine[2];
             CSVArray[3] = encryption.encrypt(nextLine[3]);
 
-            PrintCSV(CSVArray);
-            ConvertToJson(CSVArray);
+            Credentials c = new Credentials(CSVArray[0],CSVArray[1],CSVArray[2],CSVArray[3]);
+            credentials[i] = c;
+//            PrintCSV(CSVArray);
+//            ConvertToJson(CSVArray);
+            i++;
         }
+        return credentials;
     }
 
     private static void PrintCSV (String[] CSVArray) {
@@ -56,38 +60,33 @@ public class PasswordManager {
         System.out.println("Username : " + CSVArray[2]);
         System.out.println("Encrypted Password : " + CSVArray[3]);
         String encrypted = CSVArray[3];
-        try {
-            String decrypted = decryption.decrypt(encrypted);
-            System.out.println("Decrypted : " + decrypted);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String decrypted = decryption.decrypt(encrypted);
+//            System.out.println("Decrypted : " + decrypted);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
-    public String ConvertToJson(String[] CSVArray) {
-
-        String name = CSVArray[0];
-        String url = CSVArray[1];
-        String username = CSVArray[2];
-        String password = CSVArray[3];
-
-        Credentials credentials = new Credentials(name,url,username,password);
-
+    public String ConvertToJson(Credentials credentials) {
         Gson gson = this.gsonBuilder.setPrettyPrinting().create();
-
         //Print JSON
         System.out.println(gson.toJson(credentials));
-
         return gson.toJson(credentials);
     }
 
     public static void main(String[] args) throws Exception {
 
+        Credentials[] credentials = new Credentials[getNumberOfLines()];
         PasswordManager passwordManager = new PasswordManager();
         try {
-            passwordManager.ReadFromCSV();
+            credentials = passwordManager.ReadFromCSV(credentials);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        for (int i = 0; i < credentials.length; i++) {
+            passwordManager.ConvertToJson(credentials[i]);
         }
 
         System.out.println("Total number of records : " + getNumberOfLines());
