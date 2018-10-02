@@ -4,23 +4,37 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opencsv.CSVReader;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
 public class PasswordManager {
 
-    private static final String filePath = System.getProperty("user.dir");
+    private static final String FILEPATH = System.getProperty("user.dir") + File.separator + "Chrome Passwords.csv";
     private GsonBuilder gsonBuilder;
 
     public PasswordManager() throws IllegalArgumentException {
         this.gsonBuilder = new GsonBuilder().setPrettyPrinting();
     }
 
-    public void ReadFromCSV(String filepath) throws Exception {
+    public static int getNumberOfLines() {
+        BufferedReader reader = null;
+        int lines = 0;
+        try {
+            reader = new BufferedReader(new FileReader(FILEPATH));
+            while (reader.readLine() != null) lines++;
+            reader.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    public void ReadFromCSV() throws Exception {
+        Credentials[] credentials = new Credentials[getNumberOfLines()];
         Encryption encryption = new Encryption();
-        CSVReader reader = new CSVReader(new FileReader(filepath));
+        CSVReader reader = new CSVReader(new FileReader(FILEPATH));
         String [] nextLine;
-        String password;
         String[] CSVArray = new String[4];
         while ((nextLine = reader.readNext()) != null) {
             // nextLine[] is an array of values from the line
@@ -28,6 +42,8 @@ public class PasswordManager {
             CSVArray[1] = nextLine[1];
             CSVArray[2] = nextLine[2];
             CSVArray[3] = encryption.encrypt(nextLine[3]);
+
+            PrintCSV(CSVArray);
             ConvertToJson(CSVArray);
         }
     }
@@ -67,13 +83,14 @@ public class PasswordManager {
 
     public static void main(String[] args) throws Exception {
 
-        String PathToCSV = filePath + File.separator + "Chrome Passwords.csv";
         PasswordManager passwordManager = new PasswordManager();
         try {
-            passwordManager.ReadFromCSV(PathToCSV);
+            passwordManager.ReadFromCSV();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println("Total number of records : " + getNumberOfLines());
 
         //To check if encryption and decryption works
 //        Encryption en=new Encryption();
