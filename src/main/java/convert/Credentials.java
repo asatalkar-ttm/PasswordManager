@@ -7,6 +7,8 @@ public class Credentials {
     private String username;
     private String password;
 
+    public Credentials(){}
+
     public Credentials (String name, String url, String username, String password) {
         this.name = name;
         this.url = url;
