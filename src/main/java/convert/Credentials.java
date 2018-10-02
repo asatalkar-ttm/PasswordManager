@@ -2,10 +2,12 @@ package convert;
 
 public class Credentials {
 
-    private String name;
-    private String url;
-    private String username;
-    private String password;
+    public String name;
+    public String url;
+    public String username;
+    public String password;
+
+    public Credentials(){}
 
     public Credentials (String name, String url, String username, String password) {
         this.name = name;
