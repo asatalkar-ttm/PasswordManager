@@ -45,8 +45,6 @@ public class PasswordManager {
 
             Credentials c = new Credentials(CSVArray[0],CSVArray[1],CSVArray[2],CSVArray[3]);
             credentials[i] = c;
-//            PrintCSV(CSVArray);
-//            ConvertToJson(CSVArray);
             i++;
         }
         return credentials;
@@ -75,6 +73,14 @@ public class PasswordManager {
         return gson.toJson(credentials);
     }
 
+    public void printRecords(Credentials credentials) {
+        System.out.println("======================================================");
+        System.out.println("Name : " + credentials.name);
+        System.out.println("URL : " + credentials.url);
+        System.out.println("Username : " + credentials.username);
+        System.out.println("Password : " + credentials.password);
+    }
+
     public static void main(String[] args) throws Exception {
 
         Credentials[] credentials = new Credentials[getNumberOfLines()];
@@ -85,8 +91,12 @@ public class PasswordManager {
             e.printStackTrace();
         }
 
+//        for (int i = 0; i < credentials.length; i++) {
+//            passwordManager.ConvertToJson(credentials[i]);
+//        }
+
         for (int i = 0; i < credentials.length; i++) {
-            passwordManager.ConvertToJson(credentials[i]);
+            passwordManager.printRecords(credentials[i]);
         }
 
         System.out.println("Total number of records : " + getNumberOfLines());
