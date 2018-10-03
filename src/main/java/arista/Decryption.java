@@ -39,7 +39,6 @@ public class Decryption {
         } catch (BadPaddingException e) {
             e.printStackTrace();
         }
-
         return new String(decryptedTextBytes);
     }
 }

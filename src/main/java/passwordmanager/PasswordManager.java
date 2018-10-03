@@ -32,7 +32,7 @@ public class PasswordManager {
 //        System.out.println("Password : " + credentials.password);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         Credentials[] credentials = new Credentials[getNumberOfLines()];
         Csv csv = new Csv();
@@ -46,7 +46,6 @@ public class PasswordManager {
         for (int i = 0; i < credentials.length; i++) {
             jsonify.ConvertToJson(credentials[i]);
         }
-
         System.out.println("Total number of records : " + getNumberOfLines());
     }
 }
