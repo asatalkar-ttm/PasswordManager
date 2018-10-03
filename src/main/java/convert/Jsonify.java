@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import passwordmanager.Credentials;
 
+import java.util.List;
+
 public class Jsonify {
 
     private GsonBuilder gsonBuilder;
@@ -12,10 +14,11 @@ public class Jsonify {
         this.gsonBuilder = new GsonBuilder().setPrettyPrinting();
     }
 
-    public String ConvertToJson(Credentials credentials) {
+    public String ConvertToJson(List<Credentials> credentials) {
         Gson gson = this.gsonBuilder.setPrettyPrinting().create();
+        String jsonString = gson.toJson(credentials);
         //Print JSON
-        System.out.println(gson.toJson(credentials));
-        return gson.toJson(credentials);
+//        System.out.println(jsonString);
+        return jsonString;
     }
 }

@@ -3,38 +3,26 @@ package passwordmanager;
 import convert.Csv;
 import convert.Jsonify;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PasswordManager {
 
     private static final String FILEPATH = System.getProperty("user.dir") + File.separator + "Chrome Passwords.csv";
 
-    public static int getNumberOfLines() {
-        BufferedReader reader = null;
-        int lines = 0;
-        try {
-            reader = new BufferedReader(new FileReader(FILEPATH));
-            while (reader.readLine() != null) lines++;
-            reader.close();
-        } catch (Exception e){
-            e.printStackTrace();
+    public static void printRecords(List<Credentials> credentials) {
+        for(Credentials credential : credentials) {
+            System.out.println("======================================================");
+            System.out.println("Name : " + credential.getName());
+            System.out.println("URL : " + credential.getUrl());
+            System.out.println("Username : " + credential.getUsername());
+            System.out.println("Password : " + credential.getPassword());
         }
-        return lines;
-    }
-
-    public void printRecords(Credentials credentials) {
-        System.out.println("======================================================");
-        System.out.println("Name : " + credentials.name);
-        System.out.println("URL : " + credentials.url);
-        System.out.println("Username : " + credentials.username);
-//        System.out.println("Password : " + credentials.password);
     }
 
     public static void main(String[] args) {
-
-        Credentials[] credentials = new Credentials[getNumberOfLines()];
+        List<Credentials> credentials = new ArrayList<Credentials>();
         Csv csv = new Csv();
         Jsonify jsonify = new Jsonify();
         try {
@@ -42,10 +30,8 @@ public class PasswordManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        jsonify.ConvertToJson(credentials);
 
-        for (int i = 0; i < credentials.length; i++) {
-            jsonify.ConvertToJson(credentials[i]);
-        }
-        System.out.println("Total number of records : " + getNumberOfLines());
+        printRecords(credentials);
     }
 }
