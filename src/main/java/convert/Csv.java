@@ -13,7 +13,7 @@ public class Csv {
         Encryption encryption = new Encryption();
         CSVReader reader = new CSVReader(new FileReader(filePath));
         String [] nextLine;
-        String name="", url="", username="", password="";
+        String name=null, url=null, username=null, password=null;
         while ((nextLine = reader.readNext()) != null) {
             // nextLine[] is an array of values from the line
             name = nextLine[0];

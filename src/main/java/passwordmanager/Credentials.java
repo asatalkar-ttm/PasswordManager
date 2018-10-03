@@ -1,11 +1,18 @@
 package passwordmanager;
 
+import arista.Encryption;
+
+import java.util.List;
+import java.util.Scanner;
+
 public class Credentials {
 
     public String name;
     public String url;
     public String username;
     public String password;
+
+    public Credentials (){}
 
     public Credentials (String name, String url, String username, String password) {
         this.name = name;
@@ -44,5 +51,35 @@ public class Credentials {
 
     public String getPassword() {
         return password;
+    }
+
+    public static void printRecords(List<Credentials> credentials) {
+        for(Credentials credential : credentials) {
+            System.out.println("======================================================");
+            System.out.println("Name : " + credential.getName());
+            System.out.println("URL : " + credential.getUrl());
+            System.out.println("Username : " + credential.getUsername());
+        }
+    }
+
+    public List<Credentials> addCredential (List<Credentials> credentials) {
+        Encryption encryption = new Encryption();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Name : ");
+        String name = scanner.nextLine();
+        System.out.println("Enter URL : ");
+        String url = scanner.nextLine();
+        System.out.println("Enter User Name : ");
+        String username = scanner.nextLine();
+        System.out.println("Enter Password : ");
+        String password = null;
+        try {
+            password = encryption.encrypt(scanner.nextLine());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Credentials c = new Credentials(name,url,username,password);
+        credentials.add(c);
+        return credentials;
     }
 }

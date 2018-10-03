@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GeneratePassword {
 
-    public static void main(String[] args) {
+    public static void generate() {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
 
         List<CharacterRule> rules = Arrays.asList(
@@ -24,7 +24,6 @@ public class GeneratePassword {
 
             // at least one digit character
             new CharacterRule(EnglishCharacterData.Digit, 1));
-
 
         System.out.println(passwordGenerator.generatePassword(16,rules));
     }

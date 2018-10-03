@@ -11,16 +11,6 @@ public class PasswordManager {
 
     private static final String FILEPATH = System.getProperty("user.dir") + File.separator + "Chrome Passwords.csv";
 
-    public static void printRecords(List<Credentials> credentials) {
-        for(Credentials credential : credentials) {
-            System.out.println("======================================================");
-            System.out.println("Name : " + credential.getName());
-            System.out.println("URL : " + credential.getUrl());
-            System.out.println("Username : " + credential.getUsername());
-            System.out.println("Password : " + credential.getPassword());
-        }
-    }
-
     public static void main(String[] args) {
         List<Credentials> credentials = new ArrayList<Credentials>();
         Csv csv = new Csv();
@@ -30,8 +20,14 @@ public class PasswordManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        jsonify.ConvertToJson(credentials);
 
-        printRecords(credentials);
+        Credentials c = new Credentials();
+//
+//        credentials = c.addCredential(credentials);
+
+        String json = jsonify.convertToJson(credentials);
+
+        jsonify.printJson(json);
+        c.printRecords(credentials);
     }
 }

@@ -14,11 +14,14 @@ public class Jsonify {
         this.gsonBuilder = new GsonBuilder().setPrettyPrinting();
     }
 
-    public String ConvertToJson(List<Credentials> credentials) {
+    public String convertToJson(List<Credentials> credentials) {
         Gson gson = this.gsonBuilder.setPrettyPrinting().create();
         String jsonString = gson.toJson(credentials);
-        //Print JSON
-//        System.out.println(jsonString);
         return jsonString;
+    }
+
+    public void printJson(String jsonString) {
+        //Print JSON
+        System.out.println(jsonString);
     }
 }
