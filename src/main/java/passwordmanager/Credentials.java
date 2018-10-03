@@ -1,4 +1,4 @@
-package convert;
+package passwordmanager;
 
 public class Credentials {
 
