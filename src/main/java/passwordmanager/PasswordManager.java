@@ -21,13 +21,16 @@ public class PasswordManager {
             e.printStackTrace();
         }
 
-        Credentials c = new Credentials();
+        Credentials credential = new Credentials();
 //
-//        credentials = c.addCredential(credentials);
+//        credentials = credential.addCredential(credentials);
 
-        String json = jsonify.convertToJson(credentials);
+//        String json = jsonify.convertToJson(credentials);
 
-        jsonify.printJson(json);
-        c.printRecords(credentials);
+//        jsonify.printJson(json);
+//        credential.printRecords(credentials);
+        credential.find(credentials);
+
+
     }
 }

@@ -62,6 +62,20 @@ public class Credentials {
         }
     }
 
+    public void find (List<Credentials> credentials) {
+        System.out.println("Looking for : sso.trinet.com");
+        Credentials singleCredential;
+        for (int i = 0; i < credentials.size(); i++) {
+            singleCredential = credentials.get(i);
+            if (singleCredential.name.equals("sso.trinet.com")) {
+                System.out.println("Element found");
+                System.out.println("Name : " + singleCredential.getName());
+                System.out.println("URL : " + singleCredential.getUrl());
+                System.out.println("Username : " + singleCredential.getUsername());
+            }
+        }
+    }
+
     public List<Credentials> addCredential (List<Credentials> credentials) {
         Encryption encryption = new Encryption();
         Scanner scanner = new Scanner(System.in);
