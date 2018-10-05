@@ -53,7 +53,7 @@ public class Credentials {
         return password;
     }
 
-    public static void printRecords(List<Credentials> credentials) {
+    public void printRecords(List<Credentials> credentials) {
         for(Credentials credential : credentials) {
             System.out.println("======================================================");
             System.out.println("Name : " + credential.getName());
@@ -63,16 +63,58 @@ public class Credentials {
     }
 
     public void find (List<Credentials> credentials) {
-        System.out.println("Looking for : sso.trinet.com");
         Credentials singleCredential;
-        for (int i = 0; i < credentials.size(); i++) {
-            singleCredential = credentials.get(i);
-            if (singleCredential.name.equals("sso.trinet.com")) {
-                System.out.println("Element found");
-                System.out.println("Name : " + singleCredential.getName());
-                System.out.println("URL : " + singleCredential.getUrl());
-                System.out.println("Username : " + singleCredential.getUsername());
-            }
+        Scanner scanner = new Scanner(System.in);
+        String find = null;
+        System.out.println("What are you looking for ?");
+        System.out.println("1. Name");
+        System.out.println("2. URL");
+        System.out.println("3. username");
+        int input = scanner.nextInt();
+
+        switch (input) {
+            case 1:
+                System.out.println("Enter name to find : ");
+                find = scanner.nextLine();
+                System.out.println("Looking for : " + find);
+                for (int i = 0; i < credentials.size(); i++) {
+                    singleCredential = credentials.get(i);
+                    if (singleCredential.name.equals(find)) {
+                        System.out.println("Element found at index : " + i);
+                        System.out.println("Name : " + singleCredential.getName());
+                        System.out.println("URL : " + singleCredential.getUrl());
+                        System.out.println("Username : " + singleCredential.getUsername());
+                    }
+                }
+            break;
+            case 2:
+                System.out.println("Enter name to find : ");
+                find = scanner.nextLine();
+                System.out.println("Looking for : " + find);
+                for (int i = 0; i < credentials.size(); i++) {
+                    singleCredential = credentials.get(i);
+                    if (singleCredential.url.equals(find)) {
+                        System.out.println("Element found at index : " + i);
+                        System.out.println("Name : " + singleCredential.getName());
+                        System.out.println("URL : " + singleCredential.getUrl());
+                        System.out.println("Username : " + singleCredential.getUsername());
+                    }
+                }
+            break;
+            case 3:
+                System.out.println("Enter name to find : ");
+                find = scanner.nextLine();
+                System.out.println("Looking for : " + find);
+                for (int i = 0; i < credentials.size(); i++) {
+                    singleCredential = credentials.get(i);
+                    if (singleCredential.username.equals(find)) {
+                        System.out.println("Element found at index : " + i);
+                        System.out.println("Name : " + singleCredential.getName());
+                        System.out.println("URL : " + singleCredential.getUrl());
+                        System.out.println("Username : " + singleCredential.getUsername());
+                    }
+                }
+            break;
         }
     }
 
