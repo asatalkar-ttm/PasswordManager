@@ -66,12 +66,12 @@ public class PasswordManager {
 
         // print records
         credential.printRecords(credentials);
-
-        // convert credentails to JSON format
-        json = jsonify.convertToJson(credentials);
-
-        // print JSON records
-        jsonify.printJson(json);
+//
+//        // convert credentails to JSON format
+//        json = jsonify.convertToJson(credentials);
+//
+//        // print JSON records
+//        jsonify.printJson(json);
 
         // find credentials
         credential.find(credentials);

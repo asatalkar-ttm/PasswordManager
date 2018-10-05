@@ -74,12 +74,14 @@ public class Credentials {
 
         switch (input) {
             case 1:
+                scanner.nextLine();
                 System.out.println("Enter name to find : ");
                 find = scanner.nextLine();
                 System.out.println("Looking for : " + find);
                 for (int i = 0; i < credentials.size(); i++) {
                     singleCredential = credentials.get(i);
-                    if (singleCredential.name.equals(find)) {
+                    if (singleCredential.name.toLowerCase().contains(find.toLowerCase())) {
+                        System.out.println("======================================================");
                         System.out.println("Element found at index : " + i);
                         System.out.println("Name : " + singleCredential.getName());
                         System.out.println("URL : " + singleCredential.getUrl());
@@ -88,12 +90,14 @@ public class Credentials {
                 }
             break;
             case 2:
-                System.out.println("Enter name to find : ");
+                scanner.nextLine();
+                System.out.println("Enter url to find : ");
                 find = scanner.nextLine();
                 System.out.println("Looking for : " + find);
                 for (int i = 0; i < credentials.size(); i++) {
                     singleCredential = credentials.get(i);
-                    if (singleCredential.url.equals(find)) {
+                    if (singleCredential.url.toLowerCase().contains(find.toLowerCase())) {
+                        System.out.println("======================================================");
                         System.out.println("Element found at index : " + i);
                         System.out.println("Name : " + singleCredential.getName());
                         System.out.println("URL : " + singleCredential.getUrl());
@@ -102,12 +106,14 @@ public class Credentials {
                 }
             break;
             case 3:
-                System.out.println("Enter name to find : ");
+                scanner.nextLine();
+                System.out.println("Enter username to find : ");
                 find = scanner.nextLine();
                 System.out.println("Looking for : " + find);
                 for (int i = 0; i < credentials.size(); i++) {
                     singleCredential = credentials.get(i);
-                    if (singleCredential.username.equals(find)) {
+                    if (singleCredential.username.toLowerCase().contains(find.toLowerCase())) {
+                        System.out.println("======================================================");
                         System.out.println("Element found at index : " + i);
                         System.out.println("Name : " + singleCredential.getName());
                         System.out.println("URL : " + singleCredential.getUrl());
